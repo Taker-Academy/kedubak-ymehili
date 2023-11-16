@@ -12,6 +12,7 @@ Vous êtes donc à présent lead, CTO et seul dev de ce projet nouvellement reno
 
 Vous êtes un peu con de rester, mais surtout obligé de devoir réaliser ce backend avant le rendez-vous avec les investisseurs dans 3 semaines.
 
+# Instalation
 Voici un lien vers un repo GitHub contenant le frontend terminé du projet ! Pour le lancer, rien de plus simple :
 
 Rendez-vous dans le dossier du projet et écrivez les commandes suivantes :
@@ -50,6 +51,8 @@ Puis lancez la commande suivante
 docker build -t front . && docker run -p 3000:3000 front
 ```
 
+# Prérequis techniques
+
 En farfouillant dans les vieux papiers de Stéphane, vous tombez miraculeusement sur ses notes du projet.
 
 Vous trouvez alors une documentation complète de l'API du projet !
@@ -60,6 +63,7 @@ Afin de malgré tout faire honneur à la mémoire de Stéphane, vous allez devoi
 - La base de données sera une base de données NoSQL, MongoDB [MongoDB Atlas](https://cloud.mongodb.com/v2#/clusters)
 - Le langage est libre : Go, TypeScript, Elixir, Python... Cela doit justement respecter la première règle.
 
+# Critères de notation
 Au fur et à mesure que vous compléterez votre API, vous verrez le site s'améliorer. Voici les critères d'utilisation nécessaires afin de valider le projet :
 
 - Je peux créer un compte sur le site.
