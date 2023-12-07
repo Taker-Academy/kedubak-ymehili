@@ -6,7 +6,9 @@ Les gars, c'est la merde...
 
 6 mois se sont écoulés depuis votre première expérience chez KDF !
 
-Votre projet : KDF attend une grande mise à jour qui sera présentée à la Paris Games Week dans 3 semaines.
+A la surprise général le projet n'a pas marché ! Cependant le PDG de KDF est un dur à cuire et a déja une nouvelle idée en tête !
+
+Votre projet : KDB, une WebApp révolutionnaire qui va venir transformer la manière dont l'humain imaginait la communication et la sociabilisation sur internet. A ce titre, il sera présentée à la Paris Games Week dans 3 semaines.
 
 Et un immense problème vient d'arriver. Vous faisiez votre bonhomme de chemin et après 6 mois d'absence mystérieuse, Stéphane a posé sa démission et s'est barré avec l'intégralité du code backend du nouveau projet... Vous aviez pourtant déjà terminé tout le front du site en attendant Stéphane, cependant, il ne reviendra jamais !
 
@@ -73,10 +75,14 @@ Au fur et à mesure que vous compléterez votre API, vous verrez le site s'amél
 - Je peux voir mes informations sur le site, dans la page "Mon compte".
 - Je peux modifier mes informations sur le site, dans la page "Mon compte".
 - Je peux supprimer mon compte sur le site, dans la page "Mon compte".
-- Je peux voir la liste des mes commandes sur le site, dans la page "Mes commandes".
-- Je peux voir le détail d'une commande sur le site, dans la page "Mes commandes".
-- Je peux voir la liste des produits sur le site, dans la page "Home".
-- Je peux voir le détail d'un produit sur le site, dans la page "Produits".
-- [Toutes les précédentes fonctionnalités de KDF]
+- J'ai accès la liste de tous mes commentaires dans la section "Mes commentaire" dans la page "Mon compte".
+- J'ai accès la liste de tous mes posts dans la section "Mes posts" dans la page "Mon compte".
+- Je peux voir la listes des posts triés par ordre de date, le plus récent en premier, dans la page d'accueil.
+- Je peux up-vote un post dans la limite de 1 par minute.
+- Je peux cliquer sur un post pour voir et poster des commentaires sur ce dernier.
+- Je peux créer un post (titre + contenu) depuis la page d'accueil
+- Je peux supprimer un post dont je suis l'auteur
+
+Dans la poubelle de Stéphane vous avez miraculeusement trouvé un [bout de papier](https://google.com) sur lequel il avait gribouillé l'ensemble de l'architecture des routes du backend !
 
 Bon courage !
