@@ -1,5 +1,7 @@
 # KeDuBaK 🛟
 
+![taker academy logo](https://github.com/Taker-Academy/KeDuBak/assets/86067803/e582b3de-3d1e-4ba4-9270-2a8e7f24382a)
+
 Les gars, c'est la merde...
 
 6 mois se sont écoulés depuis votre première expérience chez KDF !
@@ -66,7 +68,7 @@ Afin de malgré tout faire honneur à la mémoire de Stéphane, vous allez devoi
 # Critères de notation
 Au fur et à mesure que vous compléterez votre API, vous verrez le site s'améliorer. Voici les critères d'utilisation nécessaires afin de valider le projet :
 
-- Je peux créer un compte sur le site.
+- Je peux créer un compte sur le site (Email & mot de passe).
 - Je peux me connecter à mon compte sur le site.
 - Je peux voir mes informations sur le site, dans la page "Mon compte".
 - Je peux modifier mes informations sur le site, dans la page "Mon compte".
