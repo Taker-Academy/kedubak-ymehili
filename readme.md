@@ -2,6 +2,8 @@
 
 ![taker academy logo](https://github.com/Taker-Academy/KeDuBak/assets/86067803/e582b3de-3d1e-4ba4-9270-2a8e7f24382a)
 
+## Contexte du projet 🪧
+
 Les gars, c'est la merde...
 
 6 mois se sont écoulés depuis votre première expérience chez KDF !
@@ -16,50 +18,32 @@ Vous êtes donc à présent lead, CTO et seul dev de ce projet nouvellement reno
 
 Vous êtes un peu con de rester, mais surtout obligé de devoir réaliser ce backend avant le rendez-vous avec les investisseurs dans 3 semaines.
 
-# Instalation
-Voici un lien vers un repo GitHub contenant le frontend terminé du projet ! Pour le lancer, rien de plus simple :
+## Objectif du projet 🎯
 
-Rendez-vous dans le dossier du projet et écrivez les commandes suivantes :
+- Comprendre les bases de l'architecture d'une API
+- Comprendre les bases de l'authentification
+- Comprendre les bases de la sécurité
+- Comprendre les bases de la gestion de base de données
+- Comprendre les bases de la gestion de fichiers
+- Construire une API RESTful
+- Manipuler une base de données NoSQL
+- Manipuler un ORM
 
-Clonez le repo
+## Frontend 🖥️
 
-```bash
-git clone ... && cd ...
-```
+Vous avez déjà réalisé le frontend du site, vous pouvez le retrouver sur DockerHub ! 
 
-Installez Docker si ce n'est pas déjà fait
-
-**Ubuntu / Debian :**
-
-```bash
-sudo apt install docker
-```
-
-**Fedora :**
+Vous pouvez donc le récupérer et le lancer en local avec la commande suivante :
 
 ```bash
-dnf install docker
+docker pull takeracademy/kedb-frontend
+docker run -p 3000:3000 takeracademy/kedb-frontend
 ```
 
-**Windows :**
+Cette commande va lancer le frontend sur le port 3000 de votre machine. Le site sera accessible à l'adresse suivante : `http://localhost:3000`
 
-Installez Docker Desktop ;)
 
-**MacOS :**
-
-Fallait pas voir une pomme sur le logo de l'ordinateur
-
-Puis lancez la commande suivante
-
-```bash
-docker build -t front . && docker run -p 3000:3000 front
-```
-
-# Prérequis techniques
-
-En farfouillant dans les vieux papiers de Stéphane, vous tombez miraculeusement sur ses notes du projet.
-
-Vous trouvez alors une documentation complète de l'API du projet !
+# Contraintes techniques 🛠️
 
 Afin de malgré tout faire honneur à la mémoire de Stéphane, vous allez devoir suivre quelques-unes de ses dernières volontés dans l'entreprise :
 
@@ -67,7 +51,8 @@ Afin de malgré tout faire honneur à la mémoire de Stéphane, vous allez devoi
 - La base de données sera une base de données NoSQL, MongoDB [MongoDB Atlas](https://cloud.mongodb.com/v2#/clusters)
 - Le langage est libre : Go, TypeScript, Elixir, Python... Cela doit justement respecter la première règle.
 
-# Critères de notation
+## Délivrables 📩
+
 Au fur et à mesure que vous compléterez votre API, vous verrez le site s'améliorer. Voici les critères d'utilisation nécessaires afin de valider le projet :
 
 - Je peux créer un compte sur le site
@@ -82,6 +67,14 @@ Au fur et à mesure que vous compléterez votre API, vous verrez le site s'amél
 - Je peux créer un post (titre + contenu) depuis la page d'accueil
 - Je peux supprimer un post dont je suis l'auteur
 
+## Ressources 📚
+
 Dans la poubelle de Stéphane vous avez miraculeusement trouvé un [bout de papier](https://google.com) sur lequel il avait gribouillé l'ensemble de l'architecture des routes du backend !
 
-Bon courage !
+
+## Deadline ⏳
+
+Vous avez jusqu'au **7 Avril 2024**, 23h42 pour rendre votre projet.
+
+
+## Bon courage et bon code ! 💪
