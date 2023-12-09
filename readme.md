@@ -70,7 +70,7 @@ Afin de malgré tout faire honneur à la mémoire de Stéphane, vous allez devoi
 # Critères de notation
 Au fur et à mesure que vous compléterez votre API, vous verrez le site s'améliorer. Voici les critères d'utilisation nécessaires afin de valider le projet :
 
-- Je peux créer un compte sur le site (Email & mot de passe).
+- Je peux créer un compte sur le site
 - Je peux me connecter à mon compte sur le site.
 - Je peux voir mes informations sur le site, dans la page "Mon compte".
 - Je peux modifier mes informations sur le site, dans la page "Mon compte".
