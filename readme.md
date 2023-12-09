@@ -71,6 +71,13 @@ Au fur et à mesure que vous compléterez votre API, vous verrez le site s'amél
 
 Dans la poubelle de Stéphane vous avez miraculeusement trouvé un [bout de papier](./doc.md) sur lequel il avait gribouillé l'ensemble de l'architecture des routes du backend !
 
+- [MongoDB Atlas](https://cloud.mongodb.com/v2#/clusters)
+- [RESTful API](https://restfulapi.net/)
+- [MongoDB](https://docs.mongodb.com/)
+- [Mongoose](https://mongoosejs.com/docs/guide.html)
+- [JWT](https://jwt.io/)
+- [Bcrypt](https://www.npmjs.com/package/bcrypt)
+- [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)
 
 ## Deadline ⏳
 
