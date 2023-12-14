@@ -51,8 +51,6 @@ Afin de malgré tout faire honneur à la mémoire de Stéphane, vous allez devoi
 - La base de données sera une base de données NoSQL, MongoDB [MongoDB Atlas](https://cloud.mongodb.com/v2#/clusters)
 - Le langage est libre : Go, TypeScript, Elixir, Python... Cela doit justement respecter la première règle.
 
-## Délivrables 📩
-
 Au fur et à mesure que vous compléterez votre API, vous verrez le site s'améliorer. Voici les critères d'utilisation nécessaires afin de valider le projet :
 
 - Je peux créer un compte sur le site
@@ -78,6 +76,10 @@ Dans la poubelle de Stéphane vous avez miraculeusement trouvé un [bout de papi
 - [JWT](https://jwt.io/)
 - [Bcrypt](https://www.npmjs.com/package/bcrypt)
 - [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)
+
+## Les livrables attendus 📦
+
+- Votre **repository** avec le code source.
 
 ## Deadline ⏳
 
