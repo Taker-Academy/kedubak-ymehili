@@ -37,6 +37,7 @@ Le schéma de publication définit la structure des données pour une publicatio
 L'authentification est gérée par un token JWT (JSON Web Token) qui est généré lors de la connexion ou l'inscription d'un utilisateur.
 Il doit être envoyé dans le header de chaque requête pour les routes protégées, sous forme de `"Bearer {TOKEN}"`.
 
+> ℹ️ Le token est construit à partir de l'id de l'utilisateur *(_id)* pour une durée de 24h
 ---
 
 # Routes
