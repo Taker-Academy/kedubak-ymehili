@@ -571,6 +571,7 @@ Cette route permet à un utilisateur de créer un nouveau commentaire sur un él
     "data": {
         "firstName": "John",
         "content": "Contenu du commentaire"
+        "createdAt": Date.now()
     }
 }
 ```
@@ -582,50 +583,3 @@ Cette route permet à un utilisateur de créer un nouveau commentaire sur un él
 - **401 Unauthorized:** Mauvais token JWT.
 
 ---
-
-### Endpoint [GET] `/:id` 🔐
-
-## Description
-
-Cette route permet de récupérer tous les commentaires d'un élément (post) spécifique.
-
-## Paramètres
-
-### Header
-
-- **Authorization (String, required):** Token JWT pour l'authentification.
-
-### URL Paramètre
-
-- **id (String, required):** ID de l'élément (post) à récupérer.
-
-## Format de réponse (200 OK)
-
-```json
-{
-    "ok": true,
-    "data": [
-        // Liste des commentaires
-        {
-            "id": "comment1",
-            "firstName": "Jane",
-            "content": "Super post!"
-        },
-        {
-            "id": "comment2",
-            "firstName": "Bob",
-            "content": "J'adore ce sujet!"
-        }
-    ]
-}
-```
-
-## Réponses Possibles
-
-- **200 OK:** Liste des commentaires récupérée avec succès.
-- **400 Bad Request:** Mauvaise requête, paramètres manquants ou invalides.
-- **401 Unauthorized:** Mauvais token JWT.
-- **404 Not Found:** Élément non trouvé.
-
----
-
