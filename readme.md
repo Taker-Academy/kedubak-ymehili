@@ -45,7 +45,7 @@ Cette commande va lancer le frontend sur le port 3000 de votre machine. Le site 
 
 # Contraintes techniques 🛠️
 
-> ⚠️  Afin de fonctionner avec le site, votre back DOIT tourner sur le port `8080`
+> ⚠️  Pour communiquer avec le site, votre backend **DOIT** tourner sur le port `8080`
 
 Afin de malgré tout faire honneur à la mémoire de Stéphane, vous allez devoir suivre quelques-unes de ses dernières volontés dans l'entreprise :
 
