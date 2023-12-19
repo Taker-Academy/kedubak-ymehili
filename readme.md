@@ -36,14 +36,16 @@ Vous avez déjà réalisé le frontend du site, vous pouvez le retrouver sur Doc
 Vous pouvez donc le récupérer et le lancer en local avec la commande suivante :
 
 ```bash
-docker pull takeracademy/kedb-frontend
-docker run -p 3000:3000 takeracademy/kedb-frontend
+docker pull izimio/kdb-ui:taker-academy-ui-1.0.0
+docker run -p 3000:3000 izimio/kdb-ui:taker-academy-ui-1.0.0
 ```
 
 Cette commande va lancer le frontend sur le port 3000 de votre machine. Le site sera accessible à l'adresse suivante : `http://localhost:3000`
 
 
 # Contraintes techniques 🛠️
+
+> ⚠️  Afin de fonctionner avec le site, votre back DOIT tourner sur le port `8080`
 
 Afin de malgré tout faire honneur à la mémoire de Stéphane, vous allez devoir suivre quelques-unes de ses dernières volontés dans l'entreprise :
 
