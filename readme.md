@@ -55,11 +55,11 @@ Au fur et à mesure que vous compléterez votre API, vous verrez le site s'amél
 
 - Je peux créer un compte sur le site
 - Je peux me connecter à mon compte sur le site.
-- Je peux voir mes informations sur le site, dans la page "Mon compte".
-- Je peux modifier mes informations sur le site, dans la page "Mon compte".
-- Je peux supprimer mon compte sur le site, dans la page "Mon compte".
-- J'ai accès la liste de tous mes posts dans la section "Mes posts" dans la page "Mon compte".
-- Je peux voir la listes des posts triés par ordre de date, le plus récent en premier, dans la page d'accueil.
+- Je peux voir mes informations sur le site, dans la page "Profile".
+- Je peux modifier mes informations sur le site, dans la page "Profile".
+- Je peux supprimer mon compte sur le site, dans la page "Profile".
+- J'ai accès la liste de tous mes posts dans la section "My Posts" dans la page "Profile".
+- Je peux voir la listes des posts triés par ordre de date, le plus récent en premier, dans la page "Forum".
 - Je peux up-vote un post dans la limite de 1 par minute.
 - Je peux cliquer sur un post pour voir et poster des commentaires sur ce dernier.
 - Je peux créer un post (titre + contenu) depuis la page d'accueil
