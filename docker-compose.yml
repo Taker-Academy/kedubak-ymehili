@@ -7,7 +7,7 @@ services:
     ports:
       - '8080:8080'
     volumes:
-      - ./backend:/usr/src/app
+      - .:/usr/src/app
     environment:
       - MONGODB_URI=${MONGODB_URI}
       - JWT_SECRET=${JWT_SECRET}
