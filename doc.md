@@ -99,7 +99,7 @@ Le serveur renvoie un token JWT qui permettra à l'utilisateur de s'authentifier
 - **400 Bad Request:** Mauvaise requête, paramètres manquants ou invalides.
 - **401 Unauthorized:** Mauvais identifiants.
 - **500 Internal Server Error:** Erreur interne du serveur.
---- 
+---
 
 ### Endpoint [POST] `/login`
 
