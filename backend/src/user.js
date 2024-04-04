@@ -46,7 +46,20 @@ router.put('/user/edit', async (req, res) => {
             },
         });
     } else {
-        return res.status(400).json({ error: 'User not found.' });
+        return res.status(404).json({ error: 'User not found.' });
+    }
+});
+
+router.delete('/user/delete', async (req, res) => {
+    const token = req.headers.authorization.split(' ')[1];
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    const user = await User.findById(decoded.id);
+    if (user) {
+        await user.remove();
+        res.status(200).json({ ok: true });
+    } else {
+        return res.status(404).json({ error: 'User not found.' });
     }
 });
 
