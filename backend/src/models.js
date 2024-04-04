@@ -24,6 +24,7 @@ const postSchema = new mongoose.Schema({
     content: { type: String, required: true },
     comments: [commentSchema],
     upVotes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    _id: mongoose.Schema.Types.ObjectId,
 });
 
 const User = mongoose.model('User', userSchema);
