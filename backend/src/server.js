@@ -1,11 +1,11 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const db = require('./backend/database');
-const { User, Comment, Post } = require('./backend/models');
-const router = require('./backend/routes');
-const userRoutes = require('./backend/user');
-const authRoutes = require('./backend/auth');
+const db = require('./database');
+const { User, Comment, Post } = require('./models');
+const router = require('./routes');
+const userRoutes = require('./user');
+const authRoutes = require('./auth');
 
 app.use(express.json());
 app.use(cors());

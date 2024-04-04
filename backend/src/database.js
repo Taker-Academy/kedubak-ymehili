@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
-const mongoUri = process.env.MONGODB_URI;
+const dotenv = require('dotenv');
+dotenv.config();
 
+const mongoUri = process.env.MONGODB_URI;
+console.log(mongoUri);
 mongoose.connect(mongoUri)
     .then(() => console.log('Connected to MongoDB Atlas'))
     .catch(console.error.bind(console, 'MongoDB connection error:'));
