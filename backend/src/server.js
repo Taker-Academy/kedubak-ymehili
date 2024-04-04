@@ -6,12 +6,14 @@ const { User, Comment, Post } = require('./models');
 const router = require('./routes');
 const userRoutes = require('./user');
 const authRoutes = require('./auth');
+const postRoutes = require('./post');
 
 app.use(express.json());
 app.use(cors());
 app.use('/', router);
 app.use(userRoutes);
 app.use(authRoutes);
+app.use(postRoutes);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
