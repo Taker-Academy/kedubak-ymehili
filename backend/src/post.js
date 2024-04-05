@@ -153,6 +153,21 @@ router.delete('/post/:id', async (req, res) => {
     }
 });
 
+router.post('/post/vote/:id', async (req, res) => {
+    const token = req.headers.authorization.split(' ')[1];
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
+    const post = await Post.findById(req.params.id);
+    if (post && !post.upVotes.includes(decoded.id)) {
+        post.upVotes.push(decoded.id);
+        await post.save();
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Authorization', 'Bearer ' + token);
+        res.status(200).json({
+            "ok": true,
+            "message": "post upvoted"
+        });
+    }
+});
 
 module.exports = router;
