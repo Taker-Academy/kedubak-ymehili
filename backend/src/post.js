@@ -131,7 +131,7 @@ router.delete('/post/:id', async (req, res) => {
 
     const post = await Post.findById(req.params.id);
     if (post) {
-        await post.remove();
+        await Post.deleteOne({ _id: req.params.id });
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Authorization', 'Bearer ' + token);
         res.status(200).json({
