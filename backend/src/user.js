@@ -56,7 +56,6 @@ router.delete('/user/remove', async (req, res) => {
     const user = await User.findById(decoded.id);
 
     console.log(user);
-
     await User.deleteOne({ _id: decoded.id });
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Authorization', 'Bearer ' + token);
