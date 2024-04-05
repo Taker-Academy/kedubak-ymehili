@@ -92,7 +92,7 @@ router.get('/post/me', async (req, res) => {
             }))
         });
     } else {
-        return res.status(400).json({ error: 'No posts found for this user.' });
+        return res.status(400).json({ error: 'No posts found' });
     }
 });
 
