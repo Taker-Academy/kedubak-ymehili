@@ -50,16 +50,26 @@ router.put('/user/edit', async (req, res) => {
     }
 });
 
-router.delete('/user/delete', async (req, res) => {
+router.delete('/user/remove', async (req, res) => {
     const token = req.headers.authorization.split(' ')[1];
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     const user = await User.findById(decoded.id);
-    if (user) {
+    try {
         await user.remove();
-        res.status(200).json({ ok: true });
-    } else {
-        return res.status(404).json({ error: 'User not found.' });
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Authorization', 'Bearer ' + token);
+        res.status(200).json({
+            ok: true,
+            data: {
+                email: user.email,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                removed: true,
+            },
+        });
+    } catch (error) {
+        res.status(404).json({ error });
     }
 });
 
