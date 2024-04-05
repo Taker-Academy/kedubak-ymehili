@@ -24,11 +24,11 @@ router.post('/auth/register', async (req, res) => {
 
     const user = new User({
         createdAt: new Date(),
-        _id: new mongoose.Types.ObjectId(),
         email,
         firstName,
         lastName,
         password: hashedPassword,
+        _id: new mongoose.Types.ObjectId()
     });
 
     try {
