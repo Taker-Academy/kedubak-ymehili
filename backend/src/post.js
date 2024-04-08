@@ -147,6 +147,7 @@ router.get('/post/:id', async (req, res) => {
         const post = await Post.findById(req.params.id);
         if (post) {
             return res.status(200).json({
+                ok: true,
                 message: "Détails de l'élément récupérés avec succès.",
                 data: {
                     createdAt: post.createdAt,
