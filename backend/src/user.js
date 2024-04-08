@@ -55,6 +55,7 @@ router.put('/user/edit', async (req, res) => {
             user.lastName = lastName;
             user.email = email;
             user.password = newPassword;
+            user.lastUpVote = new Date() - 60000;
             await user.save();
             res.setHeader('Access-Control-Allow-Origin', '*');
             res.setHeader('Authorization', 'Bearer ' + token);
