@@ -5,11 +5,16 @@ const jwt = require('jsonwebtoken');
 const { User } = require('./models');
 
 router.get('/user/me', async (req, res) => {
-    const token = req.headers.authorization.split(' ')[1];
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    try {
+        const token = req.headers.authorization.split(' ')[1];
+        let decoded;
+        try {
+            decoded = jwt.verify(token, process.env.JWT_SECRET);
+        } catch (err) {
+            return res.status(401).json({ error: 'Mauvais token JWT.' });
+        }
 
-    const user = await User.findById(decoded.id);
-    if (user) {
+        const user = await User.findById(decoded.id);
         return res.status(200).json({
             ok: true,
             data: {
@@ -17,59 +22,90 @@ router.get('/user/me', async (req, res) => {
                 firstName: user.firstName,
                 lastName: user.lastName,
             },
+            message: 'Utilisateur récupéré avec succès.',
         });
-    } else {
-        return res.status(400).json({ error: 'User not found.' });
+    } catch (err) {
+        return res.status(500).json({ error: 'Erreur interne du serveur.' });
     }
 });
 
 router.put('/user/edit', async (req, res) => {
-    const token = req.headers.authorization.split(' ')[1];
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const newPassword = await bcrypt.hash(req.body.password, 10);
+    try {
+        if (!req.headers.authorization) {
+            return res.status(401).json({ error: 'Mauvais token JWT.' });
+        }
 
-    const user = await User.findById(decoded.id);
-    if (user) {
-        user.firstName = req.body.firstName;
-        user.lastName = req.body.lastName;
-        user.email = req.body.email;
-        user.password = newPassword;
-        await user.save();
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.setHeader('Authorization', 'Bearer ' + token);
-        res.status(200).json({
-            ok: true,
-            data: {
-                email: user.email,
-                firstName: user.firstName,
-                lastName: user.lastName,
-            },
-        });
-    } else {
-        return res.status(404).json({ error: 'User not found.' });
+        const token = req.headers.authorization.split(' ')[1];
+        let decoded;
+        try {
+            decoded = jwt.verify(token, process.env.JWT_SECRET);
+        } catch (err) {
+            return res.status(401).json({ error: 'Mauvais token JWT.' });
+        }
+
+        const { firstName, lastName, email, password } = req.body;
+        if (!firstName || !lastName || !email || !password) {
+            return res.status(422).json({ error: 'Échec de validation des paramètres.' });
+        }
+
+        const newPassword = await bcrypt.hash(password, 10);
+        const user = await User.findById(decoded.id);
+        if (user) {
+            user.firstName = firstName;
+            user.lastName = lastName;
+            user.email = email;
+            user.password = newPassword;
+            await user.save();
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.setHeader('Authorization', 'Bearer ' + token);
+            res.status(200).json({
+                ok: true,
+                message: 'Informations de l\'utilisateur mises à jour avec succès.',
+                data: {
+                    email: user.email,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                },
+            });
+        } else {
+            return res.status(404).json({ error: 'User not found.' });
+        }
+    } catch (err) {
+        return res.status(500).json({ error: 'Erreur interne du serveur.' });
     }
 });
 
 router.delete('/user/remove', async (req, res) => {
-    const token = req.headers.authorization.split(' ')[1];
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findById(decoded.id);
+    try {
+        const token = req.headers.authorization.split(' ')[1];
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    await Post.deleteMany({ userId: decoded.id });
+        const user = await User.findById(decoded.id);
+        if (!user) {
+            return res.status(404).json({ message: 'Utilisateur non trouvé.' });
+        }
 
-    console.log(user);
-    await User.deleteOne({ _id: decoded.id });
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Authorization', 'Bearer ' + token);
-    res.status(200).json({
-        ok: true,
-        data: {
-            email: user.email,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            removed: true,
-        },
-    });
+        await Post.deleteMany({ userId: decoded.id });
+
+        await User.deleteOne({ _id: decoded.id });
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Authorization', 'Bearer ' + token);
+        res.status(200).json({
+            message: 'Compte utilisateur supprimé avec succès.',
+            data: {
+                email: user.email,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                removed: true,
+            },
+        });
+    } catch (err) {
+        if (err.name === 'JsonWebTokenError') {
+            return res.status(401).json({ message: 'Mauvais token JWT.' });
+        }
+        console.error(err);
+        return res.status(500).json({ message: 'Erreur interne du serveur.' });
+    }
 });
 
 module.exports = router;
