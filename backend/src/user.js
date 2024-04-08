@@ -72,7 +72,6 @@ router.put('/user/edit', async (req, res) => {
             return res.status(404).json({ ok: false, error: 'User not found.' });
         }
     } catch (err) {
-        console.log(err);
         return res.status(500).json({ ok: false, error: 'Erreur interne du serveur.' });
     }
 });
@@ -84,7 +83,6 @@ router.delete('/user/remove', async (req, res) => {
 
         const user = await User.findById(decoded.id);
         if (!user) {
-            console.log("user not found");
             return res.status(404).json({ ok: false, message: 'Utilisateur non trouvé.' });
         }
 
@@ -107,7 +105,6 @@ router.delete('/user/remove', async (req, res) => {
         if (err.name === 'JsonWebTokenError') {
             return res.status(401).json({ ok: false, message: 'Mauvais token JWT.' });
         }
-        console.log(err);
         return res.status(500).json({ ok: false, message: 'Erreur interne du serveur.' });
     }
 });

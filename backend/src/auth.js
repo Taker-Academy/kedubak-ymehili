@@ -52,7 +52,6 @@ router.post('/auth/register', async (req, res) => {
             },
         });
     } catch (error) {
-        console.log(error);
         res.status(500).json({ ok: false, error: 'Erreur interne du serveur.' });
     }
 });
