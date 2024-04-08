@@ -7,7 +7,7 @@ const { User, Comment, Post } = require('./models');
 router.get('/post', async (req, res) => {
     try {
         if (!req.headers.authorization) {
-            return res.status(401).json({ error: 'Mauvais token JWT.' });
+            return res.status(401).json({ok: false,  error: 'Mauvais token JWT.' });
         }
 
         const token = req.headers.authorization.split(' ')[1];
@@ -15,7 +15,7 @@ router.get('/post', async (req, res) => {
         try {
             decoded = jwt.verify(token, process.env.JWT_SECRET);
         } catch (err) {
-            return res.status(401).json({ error: 'Mauvais token JWT.' });
+            return res.status(401).json({ok: false,  error: 'Mauvais token JWT.' });
         }
 
         const posts = await Post.find({});
@@ -42,7 +42,7 @@ router.get('/post', async (req, res) => {
             });
         }
     } catch (error) {
-        res.status(500).json({ error: 'Erreur interne du serveur.', details: error.message });
+        res.status(500).json({ok: false, error: 'Erreur interne du serveur.'});
     }
 });
 
@@ -52,11 +52,11 @@ router.post('/post', async (req, res) => {
     try {
         decoded = jwt.verify(token, process.env.JWT_SECRET);
     } catch (err) {
-        return res.status(401).json({ error: 'Mauvais token JWT.' });
+        return res.status(401).json({ok: false,  error: 'Mauvais token JWT.' });
     }
     const user = await User.findById(decoded.id);
     if (!user) {
-        return res.status(400).json({ error: 'Mauvaise requête, paramètres manquants ou invalides.' });
+        return res.status(400).json({ok: false,  error: 'Mauvaise requête, paramètres manquants ou invalides.' });
     }
 
     const post = new Post({
@@ -90,7 +90,7 @@ router.post('/post', async (req, res) => {
             }
         });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ok: false,  error: 'Erreur interne du serveur.'});
     }
 });
 
@@ -124,9 +124,9 @@ router.get('/post/me', async (req, res) => {
         }
     } catch (err) {
         if (err.name === 'JsonWebTokenError') {
-            return res.status(401).json({error: 'Mauvais token JWT.'});
+            return res.status(401).json({ok: false, error: 'Mauvais token JWT.'});
         } else {
-            return res.status(500).json({error: 'Erreur interne du serveur.'});
+            return res.status(500).json({ok: false, error: 'Erreur interne du serveur.'});
         }
     }
 });
@@ -134,14 +134,14 @@ router.get('/post/me', async (req, res) => {
 router.get('/post/:id', async (req, res) => {
     try {
         if (!req.headers.authorization) {
-            return res.status(401).json({ error: 'Mauvais token JWT.' });
+            return res.status(401).json({ok: false,  error: 'Mauvais token JWT.' });
         }
 
         const token = req.headers.authorization.split(' ')[1];
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
         if (!decoded) {
-            return res.status(401).json({ error: 'Mauvais token JWT.' });
+            return res.status(401).json({ok: false,  error: 'Mauvais token JWT.' });
         }
 
         const post = await Post.findById(req.params.id);
@@ -160,39 +160,39 @@ router.get('/post/:id', async (req, res) => {
                 }
             });
         } else {
-            return res.status(404).json({ error: 'Élément non trouvé.' });
+            return res.status(404).json({ok: false,  error: 'Élément non trouvé.' });
         }
     } catch (error) {
         if (error.name === 'CastError') {
-            return res.status(400).json({ error: 'Mauvaise requête, paramètres manquants ou invalides.' });
+            return res.status(400).json({ok: false,  error: 'Mauvaise requête, paramètres manquants ou invalides.' });
         }
         if (error.name === 'JsonWebTokenError') {
-            return res.status(401).json({ error: 'Mauvais token JWT.' });
+            return res.status(401).json({ok: false,  error: 'Mauvais token JWT.' });
         }
-        return res.status(500).json({ error: 'Erreur interne du serveur.' });
+        return res.status(500).json({ok: false,  error: 'Erreur interne du serveur.' });
     }
 });
 
 router.delete('/post/:id', async (req, res) => {
     try {
         if (!req.headers.authorization) {
-            return res.status(401).json({ error: 'Mauvais token JWT.' });
+            return res.status(401).json({ok: false,  error: 'Mauvais token JWT.' });
         }
 
         const token = req.headers.authorization.split(' ')[1];
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
         if (!decoded) {
-            return res.status(401).json({ error: 'Mauvais token JWT.' });
+            return res.status(401).json({ok: false,  error: 'Mauvais token JWT.' });
         }
 
         const post = await Post.findById(req.params.id);
         if (!post) {
-            return res.status(404).json({ error: 'Élément non trouvé.' });
+            return res.status(404).json({ok: false,  error: 'Élément non trouvé.' });
         }
 
         if (post.userId.toString() !== decoded.id) {
-            return res.status(403).json({ error: "L'utilisateur n'est pas le propriétaire de l'élément." });
+            return res.status(403).json({ok: false,  error: "L'utilisateur n'est pas le propriétaire de l'élément." });
         }
 
         await Post.deleteOne({ _id: req.params.id });
@@ -214,7 +214,7 @@ router.delete('/post/:id', async (req, res) => {
             }
         });
     } catch (error) {
-        return res.status(500).json({ error: 'Erreur interne du serveur.' });
+        return res.status(500).json({ok: false,  error: 'Erreur interne du serveur.' });
     }
 });
 
@@ -225,25 +225,25 @@ router.post('/post/vote/:id', async (req, res) => {
         try {
             decoded = jwt.verify(token, process.env.JWT_SECRET);
         } catch (err) {
-            return res.status(401).json({ error: "Mauvais token JWT." });
+            return res.status(401).json({ok: false,  error: "Mauvais token JWT." });
         }
 
         const user = await User.findById(decoded.id);
         if (!user) {
-            return res.status(422).json({ error: "ID invalide." });
+            return res.status(422).json({ok: false,  error: "ID invalide." });
         }
 
         if (user.lastUpVote && new Date() - user.lastUpVote < 60000) {
-            return res.status(403).json({ error: "Vous ne pouvez voter que toutes les minutes." });
+            return res.status(403).json({ok: false,  error: "Vous ne pouvez voter que toutes les minutes." });
         }
 
         const post = await Post.findById(req.params.id);
         if (!post) {
-            return res.status(404).json({ error: "Élément non trouvé." });
+            return res.status(404).json({ok: false,  error: "Élément non trouvé." });
         }
 
         if (post.upVotes.includes(decoded.id)) {
-            return res.status(409).json({ error: "Vous avez déjà voté pour ce post." });
+            return res.status(409).json({ok: false,  error: "Vous avez déjà voté pour ce post." });
         }
 
         post.upVotes.push(decoded.id);
@@ -256,10 +256,10 @@ router.post('/post/vote/:id', async (req, res) => {
         res.setHeader('Authorization', 'Bearer ' + token);
         res.status(200).json({
             "ok": true,
-            "message": "Vote enregistré avec succès."
+            "message": "post upvoted",
         });
     } catch (err) {
-        res.status(500).json({ error: "Erreur interne du serveur." });
+        res.status(500).json({ok: false,  error: "Erreur interne du serveur." });
     }
 });
 

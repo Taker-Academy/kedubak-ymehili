@@ -9,14 +9,12 @@ router.post('/auth/register', async (req, res) => {
     const { email, password, firstName, lastName } = req.body;
 
     if (!email || !password || !firstName || !lastName) {
-        return res.status(400).json({ error: 'Mauvaise requête, paramètres manquants ou invalides.' });
+        return res.status(400).json({ ok: false, error: 'Mauvaise requête, paramètres manquants ou invalides.' });
     }
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-        return res.status(401).json({
-            error: 'Mauvais identifiants.'
-        });
+        return res.status(401).json({ ok: false, error: 'Mauvais identifiants.' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -55,7 +53,7 @@ router.post('/auth/register', async (req, res) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: 'Erreur interne du serveur.' });
+        res.status(500).json({ ok: false, error: 'Erreur interne du serveur.' });
     }
 });
 
@@ -63,7 +61,7 @@ router.post('/auth/login', async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-        return res.status(400).json({ error: 'Mauvaise requête, paramètres manquants ou invalides.' });
+        return res.status(400).json({ ok: false, error: 'Mauvaise requête, paramètres manquants ou invalides.' });
     }
 
     const existingUser = await User.findOne({ email });
@@ -71,9 +69,7 @@ router.post('/auth/login', async (req, res) => {
         firstName = existingUser.firstName;
         lastName = existingUser.lastName;
     } else {
-        return res.status(401).json({
-            error: 'Mauvais identifiants.',
-        });
+        return res.status(401).json({ ok: false, error: 'Mauvais identifiants.', });
     }
 
     try {
@@ -97,7 +93,7 @@ router.post('/auth/login', async (req, res) => {
             message: 'Connexion réussie.'
         });
     } catch (error) {
-        res.status(500).json({ error: 'Erreur interne du serveur.', message: error.message });
+        res.status(500).json({ ok: false, error: 'Erreur interne du serveur.'});
     }
 });
 
