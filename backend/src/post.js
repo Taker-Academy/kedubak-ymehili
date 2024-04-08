@@ -5,26 +5,30 @@ const mongoose = require('mongoose');
 const { User, Comment, Post } = require('./models');
 
 router.get('/post', async (req, res) => {
-    const token = req.headers.authorization.split(' ')[1];
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    try {
+        const token = req.headers.authorization.split(' ')[1];
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    const posts = await Post.find({});
-    if (posts.length > 0) {
-        return res.status(200).json({
-            ok: true,
-            data: posts.map(post => ({
-                createdAt: post.createdAt,
-                userId: post.userId,
-                firstName: post.firstName,
-                title: post.title,
-                content: post.content,
-                comments: post.comments,
-                upVotes: post.upVotes,
-                _id: post._id
-            }))
-        });
-    } else {
-        return res.status(400).json({ error: 'No posts found' });
+        const posts = await Post.find({});
+        if (posts.length > 0) {
+            return res.status(200).json({
+                ok: true,
+                data: posts.map(post => ({
+                    createdAt: post.createdAt,
+                    userId: post.userId,
+                    firstName: post.firstName,
+                    title: post.title,
+                    content: post.content,
+                    comments: post.comments,
+                    upVotes: post.upVotes,
+                    _id: post._id
+                }))
+            });
+        } else {
+            return res.status(400).json({ error: 'No posts found' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
 });
 
@@ -73,7 +77,7 @@ router.post('/post', async (req, res) => {
 router.get('/post/me', async (req, res) => {
     const token = req.headers.authorization.split(' ')[1];
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    user = await User.findById(decoded.id);
+    const user = await User.findById(decoded.id);
 
     const posts = await Post.find({ userId: decoded.id });
     if (posts.length > 0) {

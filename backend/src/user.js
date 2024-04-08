@@ -55,6 +55,8 @@ router.delete('/user/remove', async (req, res) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findById(decoded.id);
 
+    await Post.deleteMany({ userId: decoded.id });
+
     console.log(user);
     await User.deleteOne({ _id: decoded.id });
     res.setHeader('Access-Control-Allow-Origin', '*');
