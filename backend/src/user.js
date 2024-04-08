@@ -2,7 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-const { User , Post} = require('./models');
+const { User, Post } = require('./models');
 
 router.get('/user/me', async (req, res) => {
     try {
@@ -11,7 +11,7 @@ router.get('/user/me', async (req, res) => {
         try {
             decoded = jwt.verify(token, process.env.JWT_SECRET);
         } catch (err) {
-            return res.status(401).json({ok: false,  error: 'Mauvais token JWT.' });
+            return res.status(401).json({ ok: false, error: 'Mauvais token JWT.' });
         }
 
         const user = await User.findById(decoded.id);
@@ -25,7 +25,7 @@ router.get('/user/me', async (req, res) => {
             message: 'Utilisateur récupéré avec succès.',
         });
     } catch (err) {
-        return res.status(500).json({ok: false,  error: 'Erreur interne du serveur.' });
+        return res.status(500).json({ ok: false, error: 'Erreur interne du serveur.' });
     }
 });
 
@@ -45,7 +45,7 @@ router.put('/user/edit', async (req, res) => {
 
         const { firstName, lastName, email, password } = req.body;
         if (!firstName || !lastName || !email || !password) {
-            return res.status(422).json({ok: false,  error: 'Échec de validation des paramètres.' });
+            return res.status(422).json({ ok: false, error: 'Échec de validation des paramètres.' });
         }
 
         const newPassword = await bcrypt.hash(password, 10);
@@ -69,11 +69,11 @@ router.put('/user/edit', async (req, res) => {
                 },
             });
         } else {
-            return res.status(404).json({ok: false,  error: 'User not found.' });
+            return res.status(404).json({ ok: false, error: 'User not found.' });
         }
     } catch (err) {
         console.log(err);
-        return res.status(500).json({ok: false,  error: 'Erreur interne du serveur.' });
+        return res.status(500).json({ ok: false, error: 'Erreur interne du serveur.' });
     }
 });
 
@@ -85,7 +85,7 @@ router.delete('/user/remove', async (req, res) => {
         const user = await User.findById(decoded.id);
         if (!user) {
             console.log("user not found");
-            return res.status(404).json({ok: false,  message: 'Utilisateur non trouvé.' });
+            return res.status(404).json({ ok: false, message: 'Utilisateur non trouvé.' });
         }
 
         await Post.deleteMany({ userId: decoded.id });
@@ -94,7 +94,7 @@ router.delete('/user/remove', async (req, res) => {
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Authorization', 'Bearer ' + token);
         res.status(200).json({
-            ok : true,
+            ok: true,
             message: 'Compte utilisateur supprimé avec succès.',
             data: {
                 email: user.email,
@@ -105,10 +105,10 @@ router.delete('/user/remove', async (req, res) => {
         });
     } catch (err) {
         if (err.name === 'JsonWebTokenError') {
-            return res.status(401).json({ok: false,  message: 'Mauvais token JWT.' });
+            return res.status(401).json({ ok: false, message: 'Mauvais token JWT.' });
         }
         console.log(err);
-        return res.status(500).json({ok: false,  message: 'Erreur interne du serveur.' });
+        return res.status(500).json({ ok: false, message: 'Erreur interne du serveur.' });
     }
 });
 
