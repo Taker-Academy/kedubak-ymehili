@@ -77,6 +77,7 @@ router.post('/post', async (req, res) => {
         res.setHeader('Authorization', 'Bearer ' + token);
 
         res.status(201).json({
+            ok: true,
             message: 'Élément créé avec succès.',
             data: {
                 createdAt: post.createdAt,
@@ -197,6 +198,7 @@ router.delete('/post/:id', async (req, res) => {
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Authorization', 'Bearer ' + token);
         res.status(200).json({
+            ok: true,
             message: 'Élément supprimé avec succès.',
             data: {
                 createdAt: post.createdAt,

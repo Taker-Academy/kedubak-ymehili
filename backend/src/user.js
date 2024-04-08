@@ -2,7 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-const { User } = require('./models');
+const { User , Post} = require('./models');
 
 router.get('/user/me', async (req, res) => {
     try {
@@ -71,6 +71,7 @@ router.put('/user/edit', async (req, res) => {
             return res.status(404).json({ error: 'User not found.' });
         }
     } catch (err) {
+        console.log(err);
         return res.status(500).json({ error: 'Erreur interne du serveur.' });
     }
 });
@@ -82,6 +83,7 @@ router.delete('/user/remove', async (req, res) => {
 
         const user = await User.findById(decoded.id);
         if (!user) {
+            console.log("user not found");
             return res.status(404).json({ message: 'Utilisateur non trouvé.' });
         }
 
@@ -91,6 +93,7 @@ router.delete('/user/remove', async (req, res) => {
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Authorization', 'Bearer ' + token);
         res.status(200).json({
+            ok : true,
             message: 'Compte utilisateur supprimé avec succès.',
             data: {
                 email: user.email,
@@ -103,7 +106,7 @@ router.delete('/user/remove', async (req, res) => {
         if (err.name === 'JsonWebTokenError') {
             return res.status(401).json({ message: 'Mauvais token JWT.' });
         }
-        console.error(err);
+        console.log(err);
         return res.status(500).json({ message: 'Erreur interne du serveur.' });
     }
 });

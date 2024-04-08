@@ -27,6 +27,7 @@ router.post('/auth/register', async (req, res) => {
         firstName,
         lastName,
         password: hashedPassword,
+        lastUpVote: new Date() - 60000,
         _id: new mongoose.Types.ObjectId()
     });
 
@@ -53,6 +54,7 @@ router.post('/auth/register', async (req, res) => {
             },
         });
     } catch (error) {
+        console.log(error);
         res.status(500).json({ error: 'Erreur interne du serveur.' });
     }
 });
