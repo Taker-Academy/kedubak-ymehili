@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     password: { type: String, required: true },
+    lastUpVote: { type: Date, default: Date.now - 1},
     _id: mongoose.Schema.Types.ObjectId,
 });
 
