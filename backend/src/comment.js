@@ -6,10 +6,31 @@ const mongoose = require('mongoose');
 const { User, Post, Comment } = require('./models');
 
 router.post('/comment/:id', async (req, res) => {
+    if (!req.headers.authorization) {
+        return res.status(401).json({ ok: false, message: 'Mauvais token JWT.' });
+    }
+
     const token = req.headers.authorization.split(' ')[1];
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    let decoded;
+    try {
+        decoded = jwt.verify(token, process.env.JWT_SECRET);
+    } catch (err) {
+        return res.status(401).json({ ok: false, message: 'Mauvais token JWT.' });
+    }
+
     const post = await Post.findById(req.params.id);
+    if (!post) {
+        return res.status(400).json({ ok: false, message: 'Mauvaise requête, paramètres manquants ou invalides.' });
+    }
+
     const user = await User.findById(decoded.id);
+    if (!user) {
+        return res.status(400).json({ ok: false, message: 'Mauvaise requête, paramètres manquants ou invalides.' });
+    }
+
+    if (!req.body.content) {
+        return res.status(400).json({ ok: false, message: 'Mauvaise requête, paramètres manquants ou invalides.' });
+    }
 
     const comment = new Comment({
         createdAt: new Date(),
